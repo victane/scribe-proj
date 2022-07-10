@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="./dash.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+</head>
+
+<body class="dash-body">
+    <div class="menu">
+        <div class=" sidebar_show ">
+            <div>
+                <a href="/">
+                    <img class="logo-class" width="60%" src="./img/scribe_logo.svg" alt="">
+                </a>
+            </div>
+
+            <div class="side-bar_links">
+                <img class="note-icon all-notes" src="./img/ic_baseline-notes.svg" alt="">
+                <span class="sidebar-span">NOTES</span>
+            </div>
+            <div class="side-bar_links">
+                <img class="note-icon save-note" src="./img/gis_map-favorite.svg" alt="">
+                <span class="sidebar-span">SAVED</span>
+            </div>
+            <div class="sign-out">
+                <button class="side-btn">Sign out</button>
+            </div>
+        </div>
+    </div>
+    <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </div>
+    <section>
+        <div class="container">
+            <div class="main-board hide">
+                <div class="text-container">
+                    <div class="textbox-container">
+                        <div class="textarea-border">
+
+                            <form action="/dash" method="POST">
+                                <!-- <form action="action.html" method="post">   -->
+                                <!-- <label>User Name:</label><br>
+                                <input type="text" name="name"><br><br>
+                                <label>User Password</label><br>
+                                <input type="password" name="pass"><br><br> -->
+                                <textarea name="noteTitle" id="head-textArea" cols="30" rows="10"
+                                    placeholder="Title"></textarea>
+                                <textarea name="noteContent" id="para-textArea" cols="30" rows="10"
+                                    placeholder="Notes"></textarea>
+                                <div class="utilities">
+                                    <button type="submit" class="button">button</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="content-container">
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div id="map">
+
+            </div>
+            <!-- <div class="menu">
+                <div class="side-bar">
+                    <div>
+                        <img width="150px" src="./img/scribe_logo.svg" alt="">
+                    </div>
+
+                    <div class="side-bar_links">
+                        <div><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <span>NOTES</span>
+                        </div>
+                        <div><i class="fa fa-map-o" aria-hidden="true"></i>
+                            <span>SAVED</span>
+                        </div>
+                    </div>
+                    <div class="sign-out">
+                        <button>Sign Out</button>
+                    </div>
+                </div>
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </div> -->
+        </div>
+
+    </section>
+
+
+
+
+    <script src="./index.js"></script>
+    <script src="./dash.js"></script>
+
+</body>
+
+</html>

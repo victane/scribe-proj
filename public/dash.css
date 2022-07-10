@@ -1,0 +1,386 @@
+::-webkit-scrollbar{
+    width: 10px;
+    height: 1em;
+}
+
+::-webkit-scrollbar-track{
+    background:#354259 ;
+    border-radius: 100vw;
+    margin-block: 0.7em;
+}
+::-webkit-scrollbar-thumb {
+    background: #2E353A;
+    border-radius: 100vw;
+}
+
+.logo-class{
+    width: 83%;
+    max-width: 8rem;
+}
+.dash-body {
+    background-color: #000;
+}
+
+.side-bar {
+    display: none;
+}
+
+.sidebar-span{
+    font-size: 2.5vw;
+}
+.sidebar_show {
+    height: 33vh;
+    display: none;
+    position: absolute;
+    top: 4%;
+    padding: 3%;
+    width: 50%;
+    flex-direction: column;
+    background: #000;
+    justify-content: space-between;
+    z-index: 1000;
+    /* left: 100%; */
+    border-radius: 6px;
+    transition: 800ms;
+}
+
+.anim {
+    /* animation: slidein 100ms forwards; */
+    display: flex;
+    left: 50%;
+    transition: 800ms;
+}
+
+/* @keyframes slidein {
+    from {
+      transform: translateX(100%);
+    }
+  
+    to {
+      transform: translateX(0%);
+    }
+  } */
+
+.side-bar_links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #0F4C81;;
+    font-size: 7vw;
+    cursor: pointer;
+}
+
+.logo-div {
+    margin: 12px;
+}
+.fa-caret-down {
+    color: #0F4C81;
+    transform: rotate(-90deg);
+    left: 10px;
+    position: relative;
+    top: 5px;
+    transition: 200ms;
+}
+
+.caret-drop {
+    transform: rotate(1deg);
+}
+
+.side-btn{
+    color: #FEFEFE;
+    padding: 7px 10px;
+    font-size: .79rem;
+    border-radius: 8px;
+    border: none;
+    background: #2E353A;
+    cursor: pointer;
+}
+
+nav-icons{
+    height: 50px;
+    width: 75px;
+}
+
+.note-icon{
+    width: 12%;
+}
+
+.all-notes {
+    margin: 8px;
+}
+
+.save-note {
+    margin: 8px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column-reverse;
+    height: 92vh;
+    justify-content: flex-end;
+    width: 100%;
+    background: #2E353A;
+    margin: 15px;
+    border-radius: 20px;
+    /* overflow-y: scroll; */
+}
+
+.sign-out{
+    margin: 5px 0;
+    padding: 0 5px;
+}
+.textbox-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    background: #2E353A;
+    padding: 1px 4px;
+    border-radius: 8px;
+}
+
+#map {
+    width: 100%;
+    height: 35vh;
+    /* background: blue; */
+    position: relative;
+    outline: none;
+}
+
+textarea {
+    width: 100%;
+    height: 10vh;
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+#head-textArea {
+    padding: 10px;
+    font-size: 20px;
+    height: 8vh;
+    font-family: 'Montserrat', san sans-serif;
+    font-weight: 500;
+    width: 100%;
+    background: none;
+    color: #fefefe97;
+}
+
+#para-textArea {
+    padding: 10px;
+    font-size: 1.1rem;
+    width: 100%;
+    height: 12vh;
+    background: none;
+    color: #fefefe97;
+}
+
+.textarea-border {
+    border: thin solid;
+    margin: 5px;
+    border-radius: 10px;
+    width: 100%;
+    padding: 3px 3px;
+    color: #fefefe47;
+}
+
+.utilities {
+    display: flex;
+    width: 100%;
+    /* border: thin solid; */
+    height: 7vh;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 10px
+}
+
+.main-board {
+    /* background: #FEFEFE; */
+    /* display: none; */
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    position: relative;
+    /* top: 37%; */
+
+}
+.hide {
+    display: none;
+}
+.show {
+    display: flex;
+}
+
+.text-container {
+    padding: 10px 10px;
+    /* overflow: scroll; */
+    max-height: 60vh;
+}
+
+
+/* .send-span {
+    width: 90px;
+    background: #000;
+    color: #fefefe;
+    height: 5vh;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+} */
+
+form .utilities input[type='submit'] {
+    width: 90px;
+    background: #000;
+    color: #fefefe;
+    height: 5vh;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.content-container {
+    padding: 10px 10px;
+}
+
+.new-content {
+    margin: 3px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.new_content-child {
+    background: #354259;
+    width: 100%;
+    /* max-width: 300px; */
+    min-height: 22vh;
+    padding: 5px 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.parent_h2-span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: thin solid; */
+    padding: 4px;
+    margin: 2px;
+    border-radius: 8px;
+    color: #fefefe97;
+}
+
+.content-h2 {
+    font-size: 1.3rem;
+    height: 100%;
+    word-break: break-all
+}
+
+.parent_h2-span span {
+    border: thin solid;
+    border-radius: 8px;
+    padding: 3px 2px;
+    font-size: .8rem;
+}
+
+.parent_content-p{
+    color: #fefefe97;
+    /* border: thin solid; */
+    padding: 9px 3px;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.content-p {
+    font-size: .9rem;
+    overflow-wrap: break-word;
+    height: 100%;
+}
+
+.locality-container {
+    display: flex;
+    justify-content: space-between;
+    color: #fefefe4f;
+    /* border: thin solid; */
+    padding: 4px 2px;
+    font-size: 13px;
+    border-radius: 8px;
+}
+
+.edit-con {
+    /* border: thin solid; */
+    padding: 2px;
+}
+.edit-fa {
+    margin: 2px;
+}
+
+@media screen and (min-width: 920px) {
+    .fa.fa-caret-down {
+        display: none;
+    }
+
+    .dash-body{
+        display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .main-board{
+        max-width: 50%;
+    }
+
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        height: 95vh;
+    }
+    .sidebar_show{
+        position:inherit;
+        display: flex;
+        /* top: 0; */
+        /* left: 0; */
+        height: 100vh;
+        width: 200px;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #map{
+        height: 95vh;
+        width: 730px;;
+    }
+    .note-icon{
+        width: 25%
+    }
+    .sidebar-span{
+        font-size: 1.7vw;
+        font-weight: 700;
+    }
+    .logo-class{
+        width: 100%;
+    }
+    .sign-out{
+        width: 50%;
+    }
+    .side-btn{
+        width: 100%;
+        padding: 10px 10px;
+        font-weight: 600;
+        background: #0F4C81;
+        color: black;
+    }
+
+    .content-p{
+        font-size: 1.2rem;
+    letter-spacing: 1.75px;
+    }
+
+}

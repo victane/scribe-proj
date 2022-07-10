@@ -1,0 +1,19 @@
+{
+  "name": "scribe-app",
+  "version": "1.0.0",
+  "description": "'scribe note app'",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "'sunday victor'",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1"
+  }
+}
