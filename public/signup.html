@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>logout</title>
+    <link rel="stylesheet" href="./signup.css">
     <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
+
     <header class="header">
         <nav class="nav-bar">
             <div id="nav-fulllogo" class="nav-fulllogo">
@@ -22,21 +24,28 @@
             </div>
         </nav>
     </header>
-    <section class="section">
-        <div class="welcome-page">
-            <div class="img-container">
-                <img class="welcome-img" src="./img/welcome-img.svg" alt="">
-            </div>
-            <div class="welcome-info">
-                <h2 class="welcome-h2">START TAKING NOTES FROM ANYWHERE</h2>
-                <div class="span-btn">
-                    <!-- <span id="span_note" class="span"> <a href="">NOTES</a> </span> -->
-                    <a href="/dash"><span id="span_open" class="span"> OPEN</span></a>
-                </div>
-            </div>
+
+    <section class="signup-section">
+        <form action="/dash" method="POST" class="form-signup">
+            <input type="text" name="username" placeholder="username" required>
+            <input type="text" name="email" placeholder="email" required>
+            <input type="text" name="password" placeholder="password" required>
+            <button type="submit">register</button>
+        </form>
+    </section>
+
+
+    <section class="redirect-signup">
+        <div>
+            Already register go here
+            <br>
+            <a href="/login">login</a>
         </div>
 
     </section>
+
+
+    <script src=""></script>
 </body>
 
 </html>

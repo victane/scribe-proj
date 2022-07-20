@@ -1,7 +1,8 @@
-
+// form
 let tiTxt = document.getElementById('head-textArea')
 let pTxt = document.getElementById('para-textArea')
-let noteBtn = document.querySelector('.button')
+let form = document.querySelector('.form-class')
+let formButton = form.querySelector('button')
 
 let mainBoard = document.getElementsByClassName('main-board')
 let textContainer = document.getElementsByClassName('text-container')
@@ -11,6 +12,7 @@ let caretDown = document.getElementsByClassName('fa-caret-down')
 let sideShow = document.getElementsByClassName('sidebar_show')
 let anim = document.getElementsByClassName('anim')
 
+let getLoc = document.getElementById('hidden_input')
 
 const options = {
     enableHighAccuracy: true,
@@ -26,9 +28,8 @@ function success(pos) {
     let map = L.map('map').setView([lat, long], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '© OpenStreetMap'
+        attribution: '© OpennopStreetMap'
     }).addTo(map);
-
 
     // on map click let this code happen
     // 1. display popup
@@ -56,46 +57,83 @@ function success(pos) {
         mainBoard[0].classList.remove('hide')
         mainBoard[0].classList.add('show')
 
+        // set location from loc to hidden input getLoc(input html element)
+        // function getVal() {
+
+        //     let newVal = getLoc.value = loc
+        //     console.log(newVal);
+        //     return newVal
+        // }
+        // setTimeout(getVal, 5000)
+
     }
     map.on('click', onMapClick);
-    // on send button click 
-    try {
-        noteBtn.addEventListener('click', (e) => {
-
-            // get the calue of the Title and thr Paragraph
-            let noteTitle = tiTxt.value
-            let noteContent = pTxt.value
 
 
-            console.log('clicked');
-            console.log(noteTitle);
-            console.log(noteContent);
+    // this function collect data from the form
+    function collectFormData(e) {
+        e.preventDefault()
+        // get value of the noteTitle and the content
+        let noteTitle = tiTxt.value
+        let noteContent = pTxt.value
+        // console.log(noteTitle + '\n', noteContent);
+        // get dates
+        let date = new Date()
+        const currTime = (date.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }));
+        console.log(currTime);
+        // noteObject 
+        let noteObj = {
+            noteTitle,
+            noteContent,
+            loc,
+            currTime
+        }
+
+        console.log('the submit button called this fn');
+
+
+        // save all notes into this array
 
 
 
-            let date = new Date()
-            const currTime = (date.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }));
-            console.log(currTime);
+        if (!noteTitle && !noteContent === true) {
 
-            if (!noteTitle && !noteContent) {
+            // if no title & content 
+            alert('Add note title and content');
 
-                e.preventDefault()
-                // return true
-            } else
-                function localityData() {
-                    let htmlNote = `                   
+        } else {
+            let allNotes = [1, 1, 2, 3]
+            allNotes.map((val, ind) => {
+                console.log(val);
+                console.log(ind);
+            })
+            console.log(allNotes);
+
+            // code below to interact data to the server
+            // we create an object structure to receive our input 
+            let payload = noteObj;
+            // xhr object listen on the server and send data to the server
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/dash');
+            xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
+            xhr.send(JSON.stringify(payload))
+
+            // this fn create an html content with the note data and render back to the user
+            function showData() {
+
+                let htmlNote = `                   
                 <div class="new-content">
-                <div class="new_content-child">
-                <div class="parent_h2-span">
-                <h2 class="content-h2">${noteTitle}</h2>
+                    <div class="new_content-child">
+                    <div class="parent_h2-span">
+                    <h2 class="content-h2">${noteTitle}</h2>
                     <span>${currTime}</span>
-            </div>
-            <div class="parent_content-p">
-            <p class="content-p">${noteContent}</p>
-            </div>
-            <div class="locality-container">
-            <p class="locality-p">${loc}</p>
-            <span class="edit-con">
+                    </div>
+                    <div class="parent_content-p">
+                    <p class="content-p">${noteContent}</p>
+                    </div>
+                    <div class="locality-container">
+                    <p class="locality-p">${loc}</p>
+                    <span class="edit-con">
                     <i class="edit-fa fa fa-trash" aria-hidden="false"></i>
                     
                     </span>
@@ -103,21 +141,20 @@ function success(pos) {
                     </div>
                     </div>
                     `
-
-                    // textContainer[0].insertAdjacentHTML('afterend', htmlNote)
-                    contentContainer[0].insertAdjacentHTML('afterbegin', htmlNote)
-                }
+                contentContainer[0].insertAdjacentHTML('afterbegin', htmlNote)
+            }
+            showData()
             tiTxt.value = pTxt.value = '';
+            localStorage.setItem('noteData', JSON.stringify(noteObj))
+        }
+    }
 
-            localityData()
-            // return false
-            // e.currentTarget.submit();
-        })
+    try {
+        formButton.addEventListener('click', collectFormData)
 
     } catch (e) {
         console.log(e);
     }
-
 }
 
 

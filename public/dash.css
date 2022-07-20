@@ -231,7 +231,7 @@ textarea {
     cursor: pointer;
 } */
 
-form .utilities input[type='submit'] {
+button[type='submit'] {
     width: 90px;
     background: #000;
     color: #fefefe;

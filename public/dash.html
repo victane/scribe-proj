@@ -37,7 +37,7 @@
                 <span class="sidebar-span">SAVED</span>
             </div>
             <div class="sign-out">
-                <button class="side-btn">Sign out</button>
+                <button class="side-btn"> <a href="/logout">Sign out</a> </button>
             </div>
         </div>
     </div>
@@ -50,18 +50,15 @@
                     <div class="textbox-container">
                         <div class="textarea-border">
 
-                            <form action="/dash" method="POST">
-                                <!-- <form action="action.html" method="post">   -->
-                                <!-- <label>User Name:</label><br>
-                                <input type="text" name="name"><br><br>
-                                <label>User Password</label><br>
-                                <input type="password" name="pass"><br><br> -->
+                            <form action="/dash" method="POST" class="form-class">
+
                                 <textarea name="noteTitle" id="head-textArea" cols="30" rows="10"
                                     placeholder="Title"></textarea>
                                 <textarea name="noteContent" id="para-textArea" cols="30" rows="10"
                                     placeholder="Notes"></textarea>
+                                <input type="hidden" id="hidden_input" name="noteLoc" value="">
                                 <div class="utilities">
-                                    <button type="submit" class="button">button</button>
+                                    <button type="button">button</button>
                                 </div>
                             </form>
 
