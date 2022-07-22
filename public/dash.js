@@ -7,7 +7,7 @@ let formButton = form.querySelector('button')
 let mainBoard = document.getElementsByClassName('main-board')
 let textContainer = document.getElementsByClassName('text-container')
 let textBoxContainer = document.getElementsByClassName('textbox-container')
-let contentContainer = document.getElementsByClassName('content-container')
+let contentContainer = document.querySelector('.content-container')
 let caretDown = document.getElementsByClassName('fa-caret-down')
 let sideShow = document.getElementsByClassName('sidebar_show')
 let anim = document.getElementsByClassName('anim')
@@ -56,27 +56,19 @@ function success(pos) {
         // then add the class of list 
         mainBoard[0].classList.remove('hide')
         mainBoard[0].classList.add('show')
-
-        // set location from loc to hidden input getLoc(input html element)
-        // function getVal() {
-
-        //     let newVal = getLoc.value = loc
-        //     console.log(newVal);
-        //     return newVal
-        // }
-        // setTimeout(getVal, 5000)
-
     }
     map.on('click', onMapClick);
 
 
+    let allNotes = []
+    let payloadArray = [];
+    let lists;
     // this function collect data from the form
-    function collectFormData(e) {
+    async function collectFormData(e) {
         e.preventDefault()
         // get value of the noteTitle and the content
         let noteTitle = tiTxt.value
         let noteContent = pTxt.value
-        // console.log(noteTitle + '\n', noteContent);
         // get dates
         let date = new Date()
         const currTime = (date.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }));
@@ -88,64 +80,67 @@ function success(pos) {
             loc,
             currTime
         }
-
-        console.log('the submit button called this fn');
-
-
-        // save all notes into this array
-
-
-
+        // if no title & content 
         if (!noteTitle && !noteContent === true) {
-
-            // if no title & content 
             alert('Add note title and content');
-
         } else {
-            let allNotes = [1, 1, 2, 3]
-            allNotes.map((val, ind) => {
-                console.log(val);
-                console.log(ind);
-            })
+            // save notesObj into array
+            allNotes.push(noteObj)
             console.log(allNotes);
+
+
+            // console.log(localStore);
+            let localStore = localStorage.getItem('lists')
+            if (localStore === null) {
+                lists = []
+            } else {
+                lists = JSON.parse(localStore)
+            }
+
+            await lists.push(noteObj)
+            localStorage.setItem('lists', JSON.stringify(lists));
+
 
             // code below to interact data to the server
             // we create an object structure to receive our input 
             let payload = noteObj;
+            payloadArray.push(payload)
             // xhr object listen on the server and send data to the server
             let xhr = new XMLHttpRequest();
             xhr.open('POST', '/dash');
             xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
-            xhr.send(JSON.stringify(payload))
+            xhr.send(JSON.stringify(payloadArray))
+
+
 
             // this fn create an html content with the note data and render back to the user
             function showData() {
 
+
                 let htmlNote = `                   
-                <div class="new-content">
-                    <div class="new_content-child">
-                    <div class="parent_h2-span">
-                    <h2 class="content-h2">${noteTitle}</h2>
-                    <span>${currTime}</span>
-                    </div>
-                    <div class="parent_content-p">
-                    <p class="content-p">${noteContent}</p>
-                    </div>
-                    <div class="locality-container">
-                    <p class="locality-p">${loc}</p>
-                    <span class="edit-con">
-                    <i class="edit-fa fa fa-trash" aria-hidden="false"></i>
-                    
-                    </span>
-                    </div>
-                    </div>
-                    </div>
-                    `
-                contentContainer[0].insertAdjacentHTML('afterbegin', htmlNote)
+                    <div class="new-content">
+                        <div class="new_content-child">
+                        <div class="parent_h2-span">
+                        <h2 class="content-h2">${noteTitle}</h2>
+                        <span>${currTime}</span>
+                        </div>
+                        <div class="parent_content-p">
+                        <p class="content-p">${noteContent}</p>
+                        </div>
+                        <div class="locality-container">
+                        <p class="locality-p">${loc}</p>
+                        <span class="edit-con">
+                        <i class="edit-fa fa fa-trash" aria-hidden="false"></i>
+
+                        </span>
+                        </div>
+                        </div>
+                        </div>
+                        `
+                contentContainer.insertAdjacentHTML('afterbegin', htmlNote)
             }
-            showData()
             tiTxt.value = pTxt.value = '';
-            localStorage.setItem('noteData', JSON.stringify(noteObj))
+            showData()
         }
     }
 
@@ -185,3 +180,6 @@ caretDown[0].addEventListener('click', function () {
     }
 })
 
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}

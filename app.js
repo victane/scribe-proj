@@ -50,14 +50,7 @@ const redirectHome = (req, res, next) => {
     }
 }
 // dabase for user
-const users = [
-    {
-        id: 1,
-        username: 'victor',
-        email: 'sundayvictane@gmail.com',
-        psssword: 'sunday'
-    }
-]
+const users = []
 
 app.get('/', (req, res) => {
     console.log(req.session);
@@ -65,19 +58,20 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, './public/index.html'))
 })
 
-app.get('/dash', redirectLogin, (req, res) => {
+app.get('/dash', (req, res) => {
     console.log('user ativty for dashboard');
     res.sendFile(path.resolve(__dirname, './public/dash.html'))
 
 })
 app.post('/dash', (req, res) => {
-    const reqBody = req.body
+    let reqBody = JSON.parse(JSON.stringify(req.body))
     res.cookie
     console.log(`posting user activity`);
+    reqBody
     console.info(reqBody);
     // res.send(reqBody)
-    res.sendFile(path.resolve(__dirname, './public/dash.html'))
-    // res.redirect('/dash')
+    // res.sendFile(path.resolve(__dirname, './public/dash.html'))
+    res.redirect('/dash')
 
 }
 )
