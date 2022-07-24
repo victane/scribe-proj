@@ -1,3 +1,4 @@
+
 // form
 let tiTxt = document.getElementById('head-textArea')
 let pTxt = document.getElementById('para-textArea')
@@ -21,6 +22,7 @@ const options = {
 };
 
 function success(pos) {
+    readNotesFromLocalStorage()
     const crd = pos.coords;
     let lat = crd.latitude;
     let long = crd.longitude;
@@ -43,6 +45,7 @@ function success(pos) {
         fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`)
             .then(response => response.json())
             .then(data =>
+
                 // adding locality address from data to popup
                 popup
                     .setLatLng(e.latlng)
@@ -59,12 +62,17 @@ function success(pos) {
     }
     map.on('click', onMapClick);
 
-
+    // readnotesfrom loc storage
+    function readNotesFromLocalStorage() {
+        let localStore = localStorage.getItem('lists') || '[]';
+        lists = JSON.parse(localStore)
+        lists.forEach(showData);
+    }
     let allNotes = []
     let payloadArray = [];
-    let lists;
+    // let lists;
     // this function collect data from the form
-    async function collectFormData(e) {
+    function collectFormData(e) {
         e.preventDefault()
         // get value of the noteTitle and the content
         let noteTitle = tiTxt.value
@@ -89,15 +97,14 @@ function success(pos) {
             console.log(allNotes);
 
 
-            // console.log(localStore);
-            let localStore = localStorage.getItem('lists')
-            if (localStore === null) {
-                lists = []
-            } else {
-                lists = JSON.parse(localStore)
-            }
+            // let localStore = localStorage.getItem('lists')
+            // if (localStore === null) {
+            //     lists = []
+            // } else {
+            //     lists = JSON.parse(localStore)
+            // }
 
-            await lists.push(noteObj)
+            lists.push(noteObj)
             localStorage.setItem('lists', JSON.stringify(lists));
 
 
@@ -112,36 +119,36 @@ function success(pos) {
             xhr.send(JSON.stringify(payloadArray))
 
 
+            showData({ noteTitle, currTime, noteContent, loc })
 
             // this fn create an html content with the note data and render back to the user
-            function showData() {
-
-
-                let htmlNote = `                   
-                    <div class="new-content">
-                        <div class="new_content-child">
-                        <div class="parent_h2-span">
-                        <h2 class="content-h2">${noteTitle}</h2>
-                        <span>${currTime}</span>
-                        </div>
-                        <div class="parent_content-p">
-                        <p class="content-p">${noteContent}</p>
-                        </div>
-                        <div class="locality-container">
-                        <p class="locality-p">${loc}</p>
-                        <span class="edit-con">
-                        <i class="edit-fa fa fa-trash" aria-hidden="false"></i>
-
-                        </span>
-                        </div>
-                        </div>
-                        </div>
-                        `
-                contentContainer.insertAdjacentHTML('afterbegin', htmlNote)
-            }
             tiTxt.value = pTxt.value = '';
-            showData()
         }
+        return false
+    }
+    function showData({ noteTitle, currTime, noteContent, loc }) {
+
+
+        let htmlNote = `                   
+            <div class="new-content">
+                <div class="new_content-child">
+                <div class="parent_h2-span">
+                <h2 class="content-h2">${noteTitle}</h2>
+                <span>${currTime}</span>
+                </div>
+                <div class="parent_content-p">
+                <p class="content-p">${noteContent}</p>
+                </div>
+                <div class="locality-container">
+                <p class="locality-p">${loc}</p>
+                <span class="edit-con">
+                <i class="edit-fa fa fa-trash" aria-hidden="false"></i>
+                </span>
+                </div>
+                </div>
+                </div>
+                `
+        contentContainer.insertAdjacentHTML('afterbegin', htmlNote)
     }
 
     try {
